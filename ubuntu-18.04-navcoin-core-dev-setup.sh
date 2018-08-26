@@ -40,5 +40,5 @@ cd depends
 make
 cd ..
 ./autogen.sh
-./configure --prefix=`pwd`/depends/x86_64-pc-linux-gnu --enable-debug --enable-tests
+./configure --enable-debug --enable-tests
 make
