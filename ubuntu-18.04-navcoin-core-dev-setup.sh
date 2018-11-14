@@ -24,7 +24,7 @@ tar xvfz unbound-1.7.3.tar.gz
 cd unbound-1.7.3/
 ./configure
 make
-make install
+sudo make install
 cd ..
 rm -rf tmp
 
