@@ -43,6 +43,9 @@ sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
 
+#install zmq so we can run our python tests
+sudo apt-get install python3-zmq
+
 if [ $uservar == "Y" ]
 then
   #clone and build all the deps required
