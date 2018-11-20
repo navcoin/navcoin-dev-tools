@@ -1,3 +1,15 @@
+echo "This script will install the packages and libraries required to build the NavCoin Core wallet dependancies"
+echo "Do you wish to clone 'NAVCoin/navcoin-core' and build the dependancies for the master branch as well?"
+
+read -p 'Enter Y for yes or anything else to decline: ' uservar
+
+if [ $uservar == "Y" ]
+then
+  echo "The script will clone NavCoin Core and attempt to build the depends"
+else
+  echo "The script will not clone NavCoin Core"
+fi
+
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -11,7 +23,6 @@ sudo apt-get install -y libzmq3-dev
 
 #install qt5
 sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-
 
 sudo apt-get install -y libqrencode-dev curl
 
@@ -32,13 +43,16 @@ sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
 
-#clone and build all the deps required
-git clone https://github.com/NAVCoin/navcoin-core
-cd navcoin-core
-git checkout master
-cd depends
-make
-cd ..
-./autogen.sh
-./configure --enable-debug --enable-tests
-make
+if [ $uservar == "Y" ]
+then
+  #clone and build all the deps required
+  git clone https://github.com/NAVCoin/navcoin-core
+  cd navcoin-core
+  git checkout master
+  cd depends
+  make
+  cd ..
+  ./autogen.sh
+  ./configure --enable-debug --enable-tests
+  make
+fi
