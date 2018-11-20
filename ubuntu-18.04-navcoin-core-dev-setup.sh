@@ -13,7 +13,7 @@ fi
 sudo apt-get update
 sudo apt-get upgrade -y
 
-sudo apt-get install -y git build-essential libcurl3-dev libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
+sudo apt-get install -y git build-essential libcurl3-dev libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libunbound-dev
 
 sudo apt-get install -y libboost-all-dev
 
@@ -35,7 +35,7 @@ tar xvfz unbound-1.7.3.tar.gz
 cd unbound-1.7.3/
 ./configure
 make
-make install
+sudo make install
 cd ..
 rm -rf tmp
 
