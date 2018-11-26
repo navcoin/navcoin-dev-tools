@@ -1,3 +1,5 @@
+!# bin/bash
+
 echo "This script will install the packages and libraries required to build the NavCoin Core wallet dependancies"
 echo "Do you wish to clone 'NAVCoin/navcoin-core' and build the dependancies for the master branch as well?"
 
