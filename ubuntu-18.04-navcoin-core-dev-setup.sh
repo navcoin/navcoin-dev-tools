@@ -41,7 +41,14 @@ sudo make install
 cd ..
 rm -rf tmp
 
-sudo add-apt-repository ppa:bitcoin/bitcoin
+# workaround to support latest ubuntu
+if [ `lsb_release -c | cut -f2` == 'disco' ]; then 
+  echo "deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu cosmic main" | sudo tee -a /etc/apt/sources.list 
+  echo "deb-src http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu cosmic main" | sudo tee -a /etc/apt/sources.list
+else
+  sudo add-apt-repository ppa:bitcoin/bitcoin
+fi
+
 sudo apt-get update
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
 
@@ -58,6 +65,6 @@ then
   make
   cd ..
   ./autogen.sh
-  ./configure --enable-debug --enable-tests
+  ./configure --prefix=`pwd`/depends/x86_64-pc-linux-gnu --enable-debug --enable-tests
   make
 fi
