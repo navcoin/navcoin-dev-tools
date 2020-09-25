@@ -15,7 +15,7 @@ fi
 sudo apt-get update
 sudo apt-get upgrade -y
 
-sudo apt-get install -y git build-essential libcurl3-dev libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libunbound-dev
+sudo apt-get install -y git build-essential libcurl3-dev libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libunbound-dev libattr1-dev libgmp-dev libsodium-dev libseccomp-dev libcap-dev cmake
 
 sudo apt-get install -y libboost-all-dev
 
