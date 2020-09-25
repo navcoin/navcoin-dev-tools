@@ -50,6 +50,7 @@ sudo apt-get install python3-zmq
 
 if [ $uservar == "Y" ]
 then
+  cd ~
   #clone and build all the deps required
   git clone https://github.com/NAVCoin/navcoin-core
   cd navcoin-core
@@ -58,6 +59,6 @@ then
   make
   cd ..
   ./autogen.sh
-  ./configure --enable-debug --enable-tests
-  make
+  ./configure --enable-debug --enable-tests --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu 
+  make -j$(nproc)
 fi
