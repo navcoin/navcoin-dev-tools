@@ -42,6 +42,6 @@ then
   make -j$(nproc)
   cd ..
   ./autogen.sh
-  ./configure --enable-debug --enable-tests --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu 
+  ./configure --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu 
   make -j$(nproc)
 fi
