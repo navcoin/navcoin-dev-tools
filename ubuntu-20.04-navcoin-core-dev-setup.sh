@@ -12,6 +12,4 @@ else
   echo "The script will not clone NavCoin Core"
 fi
 
-echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ bionic-rc main' | sudo tee -a /etc/apt/sources.list.d/kitware.list >/dev/null
-
 source ./ubuntu-xx-navcoin-core-dev-setup.sh
