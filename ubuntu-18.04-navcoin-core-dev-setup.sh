@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "This script will install the packages and libraries required to build the NavCoin Core wallet dependancies"
-echo "Do you wish to clone 'NAVCoin/navcoin-core' and build the dependancies for the master branch as well?"
+echo "Do you wish to clone 'navcoin/navcoin-core' and build the dependancies for the master branch as well?"
 
 read -p 'Enter Y for yes or anything else to decline: ' uservar
 
@@ -12,51 +12,47 @@ else
   echo "The script will not clone NavCoin Core"
 fi
 
-sudo apt-get update
-sudo apt-get upgrade -y
+echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ bionic-rc main' | sudo tee -a /etc/apt/sources.list.d/kitware.list >/dev/null
+sudo apt update
+sudo apt upgrade -y
 
-sudo apt-get install -y git build-essential libcurl3-dev libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils libunbound-dev libattr1-dev libgmp-dev libsodium-dev libseccomp-dev libcap-dev cmake
-
-sudo apt-get install -y libboost-all-dev
-
-sudo apt-get install -y libminiupnpc-dev
-sudo apt-get install -y libzmq3-dev 
-
-
-#install qt5
-sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-
-sudo apt-get install -y libqrencode-dev curl
-
-
-#install unbound
-mkdir tmp
-cd tmp
-wget https://nlnetlabs.nl/downloads/unbound/unbound-1.7.3.tar.gz
-tar xvfz unbound-1.7.3.tar.gz
-cd unbound-1.7.3/
-./configure
-make
-sudo make install
-cd ..
-rm -rf tmp
-
-sudo add-apt-repository ppa:bitcoin/bitcoin
-sudo apt-get update
-sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
-
-#install zmq so we can run our python tests
-sudo apt-get install python3-zmq
+sudo apt install -y\
+	autoconf \
+	automake \
+	binutils-aarch64-linux-gnu \
+	binutils-arm-linux-gnueabihf \
+	binutils-gold \
+	bsdmainutils \
+	ca-certificates \
+	cmake \
+	curl \
+	faketime \
+	g++-8-aarch64-linux-gnu \
+	g++-8-arm-linux-gnueabihf \
+	g++-8-multilib \
+	g++-aarch64-linux-gnu \
+	g++-arm-linux-gnueabihf \
+	gcc-8-aarch64-linux-gnu \
+	gcc-8-arm-linux-gnueabihf \
+	gcc-8-multilib \
+	git \
+	libtool \
+	pkg-config \
+	python3 \
+	python3-pip \
+	python3-setuptools \
+	libtinfo5 \
+	libattr1-dev \
 
 if [ $uservar == "Y" ]
 then
   cd ~
   #clone and build all the deps required
-  git clone https://github.com/NAVCoin/navcoin-core
+  git clone https://github.com/navcoin/navcoin-core
   cd navcoin-core
   git checkout master
   cd depends
-  make
+  make -j$(nproc)
   cd ..
   ./autogen.sh
   ./configure --enable-debug --enable-tests --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu 
